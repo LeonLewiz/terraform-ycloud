@@ -1,0 +1,246 @@
+[0m[1mdata.yandex_compute_image.ubuntu: Reading...[0m[0m
+[0m[1mdata.yandex_compute_image.ubuntu: Read complete after 0s [id=fd8g39rqnaa88u265oic][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # yandex_compute_instance.vm["control"][0m will be created
+[0m  [32m+[0m[0m resource "yandex_compute_instance" "vm" {
+      [32m+[0m[0m created_at                = (known after apply)
+      [32m+[0m[0m folder_id                 = (known after apply)
+      [32m+[0m[0m fqdn                      = (known after apply)
+      [32m+[0m[0m gpu_cluster_id            = (known after apply)
+      [32m+[0m[0m hardware_generation       = (known after apply)
+      [32m+[0m[0m hostname                  = (known after apply)
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m maintenance_grace_period  = (known after apply)
+      [32m+[0m[0m maintenance_policy        = (known after apply)
+      [32m+[0m[0m metadata                  = {
+          [32m+[0m[0m "ssh-keys" = <<-EOT
+                ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlhRHKXx1mGytxOxteftN4rQLwMF+sbfjLRlWWSe/MG leonlewiz@devops-study
+            EOT
+        }
+      [32m+[0m[0m name                      = "devops-study-control"
+      [32m+[0m[0m network_acceleration_type = "standard"
+      [32m+[0m[0m platform_id               = "standard-v3"
+      [32m+[0m[0m reserved_instance_pool_id = (known after apply)
+      [32m+[0m[0m status                    = (known after apply)
+      [32m+[0m[0m zone                      = "ru-central1-a"
+
+      [32m+[0m[0m boot_disk {
+          [32m+[0m[0m auto_delete = true
+          [32m+[0m[0m device_name = (known after apply)
+          [32m+[0m[0m disk_id     = (known after apply)
+          [32m+[0m[0m mode        = (known after apply)
+
+          [32m+[0m[0m initialize_params {
+              [32m+[0m[0m block_size  = (known after apply)
+              [32m+[0m[0m description = (known after apply)
+              [32m+[0m[0m image_id    = "fd8g39rqnaa88u265oic"
+              [32m+[0m[0m name        = (known after apply)
+              [32m+[0m[0m size        = 15
+              [32m+[0m[0m snapshot_id = (known after apply)
+              [32m+[0m[0m type        = "network-ssd"
+            }
+        }
+
+      [32m+[0m[0m metadata_options (known after apply)
+
+      [32m+[0m[0m network_interface {
+          [32m+[0m[0m index          = (known after apply)
+          [32m+[0m[0m ip_address     = (known after apply)
+          [32m+[0m[0m ipv4           = true
+          [32m+[0m[0m ipv6           = (known after apply)
+          [32m+[0m[0m ipv6_address   = (known after apply)
+          [32m+[0m[0m mac_address    = (known after apply)
+          [32m+[0m[0m nat            = true
+          [32m+[0m[0m nat_ip_address = (known after apply)
+          [32m+[0m[0m nat_ip_version = (known after apply)
+          [32m+[0m[0m subnet_id      = (known after apply)
+        }
+
+      [32m+[0m[0m placement_policy (known after apply)
+
+      [32m+[0m[0m resources {
+          [32m+[0m[0m core_fraction = 20
+          [32m+[0m[0m cores         = 2
+          [32m+[0m[0m memory        = 2
+        }
+
+      [32m+[0m[0m scheduling_policy (known after apply)
+    }
+
+[1m  # yandex_compute_instance.vm["managed1"][0m will be created
+[0m  [32m+[0m[0m resource "yandex_compute_instance" "vm" {
+      [32m+[0m[0m created_at                = (known after apply)
+      [32m+[0m[0m folder_id                 = (known after apply)
+      [32m+[0m[0m fqdn                      = (known after apply)
+      [32m+[0m[0m gpu_cluster_id            = (known after apply)
+      [32m+[0m[0m hardware_generation       = (known after apply)
+      [32m+[0m[0m hostname                  = (known after apply)
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m maintenance_grace_period  = (known after apply)
+      [32m+[0m[0m maintenance_policy        = (known after apply)
+      [32m+[0m[0m metadata                  = {
+          [32m+[0m[0m "ssh-keys" = <<-EOT
+                ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlhRHKXx1mGytxOxteftN4rQLwMF+sbfjLRlWWSe/MG leonlewiz@devops-study
+            EOT
+        }
+      [32m+[0m[0m name                      = "devops-study-managed1"
+      [32m+[0m[0m network_acceleration_type = "standard"
+      [32m+[0m[0m platform_id               = "standard-v3"
+      [32m+[0m[0m reserved_instance_pool_id = (known after apply)
+      [32m+[0m[0m status                    = (known after apply)
+      [32m+[0m[0m zone                      = "ru-central1-a"
+
+      [32m+[0m[0m boot_disk {
+          [32m+[0m[0m auto_delete = true
+          [32m+[0m[0m device_name = (known after apply)
+          [32m+[0m[0m disk_id     = (known after apply)
+          [32m+[0m[0m mode        = (known after apply)
+
+          [32m+[0m[0m initialize_params {
+              [32m+[0m[0m block_size  = (known after apply)
+              [32m+[0m[0m description = (known after apply)
+              [32m+[0m[0m image_id    = "fd8g39rqnaa88u265oic"
+              [32m+[0m[0m name        = (known after apply)
+              [32m+[0m[0m size        = 15
+              [32m+[0m[0m snapshot_id = (known after apply)
+              [32m+[0m[0m type        = "network-ssd"
+            }
+        }
+
+      [32m+[0m[0m metadata_options (known after apply)
+
+      [32m+[0m[0m network_interface {
+          [32m+[0m[0m index          = (known after apply)
+          [32m+[0m[0m ip_address     = (known after apply)
+          [32m+[0m[0m ipv4           = true
+          [32m+[0m[0m ipv6           = (known after apply)
+          [32m+[0m[0m ipv6_address   = (known after apply)
+          [32m+[0m[0m mac_address    = (known after apply)
+          [32m+[0m[0m nat            = true
+          [32m+[0m[0m nat_ip_address = (known after apply)
+          [32m+[0m[0m nat_ip_version = (known after apply)
+          [32m+[0m[0m subnet_id      = (known after apply)
+        }
+
+      [32m+[0m[0m placement_policy (known after apply)
+
+      [32m+[0m[0m resources {
+          [32m+[0m[0m core_fraction = 20
+          [32m+[0m[0m cores         = 2
+          [32m+[0m[0m memory        = 2
+        }
+
+      [32m+[0m[0m scheduling_policy (known after apply)
+    }
+
+[1m  # yandex_compute_instance.vm["managed2"][0m will be created
+[0m  [32m+[0m[0m resource "yandex_compute_instance" "vm" {
+      [32m+[0m[0m created_at                = (known after apply)
+      [32m+[0m[0m folder_id                 = (known after apply)
+      [32m+[0m[0m fqdn                      = (known after apply)
+      [32m+[0m[0m gpu_cluster_id            = (known after apply)
+      [32m+[0m[0m hardware_generation       = (known after apply)
+      [32m+[0m[0m hostname                  = (known after apply)
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m maintenance_grace_period  = (known after apply)
+      [32m+[0m[0m maintenance_policy        = (known after apply)
+      [32m+[0m[0m metadata                  = {
+          [32m+[0m[0m "ssh-keys" = <<-EOT
+                ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlhRHKXx1mGytxOxteftN4rQLwMF+sbfjLRlWWSe/MG leonlewiz@devops-study
+            EOT
+        }
+      [32m+[0m[0m name                      = "devops-study-managed2"
+      [32m+[0m[0m network_acceleration_type = "standard"
+      [32m+[0m[0m platform_id               = "standard-v3"
+      [32m+[0m[0m reserved_instance_pool_id = (known after apply)
+      [32m+[0m[0m status                    = (known after apply)
+      [32m+[0m[0m zone                      = "ru-central1-a"
+
+      [32m+[0m[0m boot_disk {
+          [32m+[0m[0m auto_delete = true
+          [32m+[0m[0m device_name = (known after apply)
+          [32m+[0m[0m disk_id     = (known after apply)
+          [32m+[0m[0m mode        = (known after apply)
+
+          [32m+[0m[0m initialize_params {
+              [32m+[0m[0m block_size  = (known after apply)
+              [32m+[0m[0m description = (known after apply)
+              [32m+[0m[0m image_id    = "fd8g39rqnaa88u265oic"
+              [32m+[0m[0m name        = (known after apply)
+              [32m+[0m[0m size        = 15
+              [32m+[0m[0m snapshot_id = (known after apply)
+              [32m+[0m[0m type        = "network-ssd"
+            }
+        }
+
+      [32m+[0m[0m metadata_options (known after apply)
+
+      [32m+[0m[0m network_interface {
+          [32m+[0m[0m index          = (known after apply)
+          [32m+[0m[0m ip_address     = (known after apply)
+          [32m+[0m[0m ipv4           = true
+          [32m+[0m[0m ipv6           = (known after apply)
+          [32m+[0m[0m ipv6_address   = (known after apply)
+          [32m+[0m[0m mac_address    = (known after apply)
+          [32m+[0m[0m nat            = true
+          [32m+[0m[0m nat_ip_address = (known after apply)
+          [32m+[0m[0m nat_ip_version = (known after apply)
+          [32m+[0m[0m subnet_id      = (known after apply)
+        }
+
+      [32m+[0m[0m placement_policy (known after apply)
+
+      [32m+[0m[0m resources {
+          [32m+[0m[0m core_fraction = 20
+          [32m+[0m[0m cores         = 2
+          [32m+[0m[0m memory        = 2
+        }
+
+      [32m+[0m[0m scheduling_policy (known after apply)
+    }
+
+[1m  # yandex_vpc_network.net[0m will be created
+[0m  [32m+[0m[0m resource "yandex_vpc_network" "net" {
+      [32m+[0m[0m created_at                = (known after apply)
+      [32m+[0m[0m default_security_group_id = (known after apply)
+      [32m+[0m[0m folder_id                 = (known after apply)
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m labels                    = (known after apply)
+      [32m+[0m[0m name                      = "devops-study-net"
+      [32m+[0m[0m subnet_ids                = (known after apply)
+    }
+
+[1m  # yandex_vpc_subnet.subnet[0m will be created
+[0m  [32m+[0m[0m resource "yandex_vpc_subnet" "subnet" {
+      [32m+[0m[0m created_at     = (known after apply)
+      [32m+[0m[0m folder_id      = (known after apply)
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m labels         = (known after apply)
+      [32m+[0m[0m name           = "devops-study-subnet"
+      [32m+[0m[0m network_id     = (known after apply)
+      [32m+[0m[0m v4_cidr_blocks = [
+          [32m+[0m[0m "192.168.10.0/24",
+        ]
+      [32m+[0m[0m v6_cidr_blocks = (known after apply)
+      [32m+[0m[0m zone           = "ru-central1-a"
+    }
+
+[1mPlan:[0m [0m5 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  [32m+[0m[0m vm_external_ips = {
+      [32m+[0m[0m control  = (known after apply)
+      [32m+[0m[0m managed1 = (known after apply)
+      [32m+[0m[0m managed2 = (known after apply)
+    }
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
