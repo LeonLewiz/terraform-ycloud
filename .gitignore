@@ -4,3 +4,4 @@ key.json
 .terraform/
 .terraform.lock.hcl
 terraform.tfvars
+id_ed25519
