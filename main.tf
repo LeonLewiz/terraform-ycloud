@@ -28,6 +28,11 @@ data "yandex_compute_image" "ubuntu" {
   family = "ubuntu-2204-lts"
 }
 
+resource "tls_private_key" "ssh_key" {
+  algorithm = "ED25519"
+}
+
+
 resource "yandex_compute_instance" "vm" {
   for_each = local.vms
 
@@ -55,8 +60,14 @@ resource "yandex_compute_instance" "vm" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file(pathexpand("~/.ssh/id_ed25519.pub"))}"
+    ssh-keys = "ubuntu:${tls_private_key.ssh_key.public_key_openssh}"
   }
+}
+
+resource "local_file" "private_key" {
+  content  = tls_private_key.ssh_key.private_key_openssh
+  filename = "${path.module}/id_ed25519"
+  file_permission = "0600"
 }
 
 resource"local_file" "inventory" {
