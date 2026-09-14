@@ -61,7 +61,6 @@ jobs:
         run: |
           terraform apply -auto-approve
 
-            # 8. Запуск вашего конфигурационного плейбука
       - name: Run Ansible Playbook
         working-directory: ./ansible-code
         env:
