@@ -36,8 +36,10 @@ jobs:
           pip3 install ansible
 
       - name: Export cloud key to machine.
+        env:
+          RAW_CLOUD_KEY: ${{ secrets.YANDEX_CLOUD_KEY }} 
         run: |
-          echo "${{ secrets.YANDEX_CLOUD_KEY }}" > key.json
+          echo "$RAW_CLOUD_KEY" > key.json
 
       - name: Cloud access.
         env:
