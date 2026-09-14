@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout Terraform repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout Ansible repo
+        uses: actions/checkout@v4
+        with:
+          repository: 'LeonLewiz/ansible-lab' 
+          token: ${{ secrets.ANSIBLE_REPO_TOKEN }}
+          path: ansible-code
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+
+      - name: Setup Python & Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip
+          pip3 install ansible
+
+      - name: Export cloud key to machine.
+        run: |
+          echo "${{ secrets.YANDEX_CLOUD_KEY }}" > key.json
+
+      - name: Cloud access.
+        env:
+          YC_SERVICE_ACCOUNT_KEY_FILE: "./key.json"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          terraform init
+
+      - name: Deploy Infrastructure.
+        env:
+          YC_SERVICE_ACCOUNT_KEY_FILE: "./key.json"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          terraform apply -auto-approve
+
+      - name: Run Ansible Playbook
+        working-directory: ./ansible-code
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        run: |
+          ansible-playbook -i inventory.ini sites.yml
