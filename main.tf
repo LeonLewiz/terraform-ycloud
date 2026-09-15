@@ -87,5 +87,8 @@ resource "local_file" "private_key" {
 
 resource "local_file" "inventory" {
   filename = var.inventory_path
-  content  = templatefile("inventory.tpl", { vms = yandex_compute_instance.vm })
+  content = templatefile("inventory.tpl", {
+    vms          = yandex_compute_instance.vm
+    ssh_key_path = "${path.module}/id_ed25519"
+  })
 }
