@@ -11,8 +11,7 @@ terraform {
       source = "hashicorp/time"
   }
   }
-}
-backend "s3" {
+  backend "s3" {
     endpoint = "https://storage.yandexcloud.net"
     region   = "ru-central1"
     bucket   = "ci-state-bucket"
