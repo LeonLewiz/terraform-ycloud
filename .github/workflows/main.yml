@@ -76,8 +76,10 @@ jobs:
         env:
           ANSIBLE_SSH_KEY: ${{ github.workspace }}/id_ed25519
         run: |
+          pwd
           ls -l hosts.sh
           ./hosts.sh | head -20
+          head -1 hosts.sh | xxd | head -2
       
       - name: Run Ansible Playbook
         working-directory: ./ansible-code
