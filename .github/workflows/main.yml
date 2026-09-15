@@ -68,6 +68,7 @@ jobs:
         working-directory: ./ansible-code
         env:
           VAULT_PASS: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          ANSIBLE_INVENTORY: hosts.ini
           ANSIBLE_HOST_KEY_CHECKING: "False"
         run: |
           echo "$VAULT_PASS" > "$RUNNER_TEMP/.vault_pass"
