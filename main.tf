@@ -76,7 +76,6 @@ resource "yandex_compute_instance" "vm" {
   network_interface {
     subnet_id = data.yandex_vpc_subnet.default_a.id
     nat       = true
-    security_group_ids = [var.sg_id]
   }
 
   metadata = {
