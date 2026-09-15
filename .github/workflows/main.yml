@@ -30,6 +30,14 @@ jobs:
           pipx install ansible
           pipx ensurepath
           
+     
+            
+      - name: Export cloud key to machine.
+        env:
+          RAW_CLOUD_KEY: ${{ secrets.YANDEX_CLOUD_KEY }} 
+        run: |
+          echo "$RAW_CLOUD_KEY" > key.json
+
       - name: Setup yc CLI
         env:
           FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
@@ -39,12 +47,6 @@ jobs:
           "$HOME/yandex-cloud/bin/yc" config profile create ci
           "$HOME/yandex-cloud/bin/yc" config set service-account-key ./key.json
           "$HOME/yandex-cloud/bin/yc" config set folder-id "$FOLDER_ID"
-            
-      - name: Export cloud key to machine.
-        env:
-          RAW_CLOUD_KEY: ${{ secrets.YANDEX_CLOUD_KEY }} 
-        run: |
-          echo "$RAW_CLOUD_KEY" > key.json
 
       - name: Cloud access.
         env:
