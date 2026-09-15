@@ -1,3 +1,4 @@
 [managed]
-managed1 ansible_host=${m1_ip} ansible_user=ubuntu
-managed2 ansible_host=${m2_ip} ansible_user=ubuntu
+%{ for k, v in vms ~}
+${k} ansible_host=${v.network_interface[0].nat_ip_address} ansible_user=ubuntu ansible_ssh_private_key_file=${ssh_key_path}
+%{ endfor ~}
