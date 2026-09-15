@@ -12,7 +12,6 @@ terraform {
   }
   }
 }
-}
 backend "s3" {
     endpoint = "https://storage.yandexcloud.net"
     region   = "ru-central1"
