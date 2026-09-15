@@ -10,7 +10,10 @@ terraform {
     time = {
       source = "hashicorp/time"
   }
-  backend "s3" {
+  }
+}
+}
+backend "s3" {
     endpoint = "https://storage.yandexcloud.net"
     region   = "ru-central1"
     bucket   = "ci-state-bucket"
@@ -19,8 +22,6 @@ terraform {
     skip_region_validation      = true
     skip_credentials_validation = true
     skip_requesting_account_id  = true
-  }
-}
 }
 provider "yandex" {
   service_account_key_file     = "key.json"
