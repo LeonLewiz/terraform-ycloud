@@ -69,10 +69,8 @@ jobs:
       - name: Run Ansible Playbook
         working-directory: ./ansible-code
         env:
-          ANSIBLE_HOST_KEY_CHECKING: "False"
           VAULT_PASS: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          ANSIBLE_VAULT_PASSWORD_FILE: "./.vault_pass"
         run: |
-          echo "$VAULT_PASS" > ./.vault_pass
-          ansible-playbook -i hosts.ini site.yml
-          rm -f ./.vault_pass
+          echo "$VAULT_PASS" > "$RUNNER_TEMP/.vault_pass"
+          ansible-playbook -i hosts.ini site.yml \
+          --vault-password-file "$RUNNER_TEMP/.vault_pass"
