@@ -8,6 +8,16 @@ terraform {
       source = "hashicorp/local"
     }
   }
+  backend "s3" {
+    endpoint = "https://storage.yandexcloud.net"
+    region   = "ru-central1"
+    bucket   = "ci-state-bucket"
+    key      = "terraform.tfstate"
+
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true
+  }
 }
 
 provider "yandex" {
@@ -64,16 +74,18 @@ resource "yandex_compute_instance" "vm" {
   }
 }
 
+variable "inventory_path" {
+  type    = string
+  default = "../ansible-lab/hosts.ini"
+}
+
 resource "local_file" "private_key" {
   content  = tls_private_key.ssh_key.private_key_openssh
   filename = "${path.module}/id_ed25519"
   file_permission = "0600"
 }
 
-resource"local_file" "inventory" {
-  filename = "../ansible-lab/hosts.ini"
-  content = templatefile("inventory.tpl", {
-    m2_ip      = yandex_compute_instance.vm["managed2"].network_interface[0].nat_ip_address
-    m1_ip      = yandex_compute_instance.vm["managed1"].network_interface[0].nat_ip_address
-  })
+resource "local_file" "inventory" {
+  filename = var.inventory_path
+  content  = templatefile("inventory.tpl", { vms = yandex_compute_instance.vm })
 }
