@@ -7,6 +7,8 @@ terraform {
     local = {
       source = "hashicorp/local"
     }
+    time = {
+      source = "hashicorp/time"
   }
   backend "s3" {
     endpoint = "https://storage.yandexcloud.net"
@@ -43,7 +45,7 @@ resource "tls_private_key" "ssh_key" {
 }
 
 resource "time_sleep" "wait_vms" {
-  create_duration = "60s"
+  create_duration = "90s"
   depends_on      = [yandex_compute_instance.vm]
 }
 
