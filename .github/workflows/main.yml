@@ -58,6 +58,12 @@ jobs:
         run: |
           terraform apply -auto-approve
 
+
+      - name: Debug inventory
+        run: |
+          cat ansible-code/hosts.ini
+          ls -l id_ed25519
+    
       - name: Run Ansible Playbook
         working-directory: ./ansible-code
         env:
