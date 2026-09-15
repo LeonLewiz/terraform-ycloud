@@ -44,10 +44,10 @@ jobs:
         run: |
           curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh \
             | bash -s -- -i "$HOME/yandex-cloud" -n
-        "$HOME/yandex-cloud/bin/yc" config profile create ci
-        "$HOME/yandex-cloud/bin/yc" config set service-account-key "${{ github.workspace }}/key.json"
-        "$HOME/yandex-cloud/bin/yc" config set folder-id "$FOLDER_ID"
-        "$HOME/yandex-cloud/bin/yc" config list
+          "$HOME/yandex-cloud/bin/yc" config profile create ci
+          "$HOME/yandex-cloud/bin/yc" config set service-account-key "${{ github.workspace }}/key.json"
+          "$HOME/yandex-cloud/bin/yc" config set folder-id "$FOLDER_ID"
+          "$HOME/yandex-cloud/bin/yc" config list
 
       - name: Cloud access.
         env:
