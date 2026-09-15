@@ -1,11 +1,13 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - 'v*'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "terraform action"
+        type: choice
+        options: [apply]
+        default: apply
 
 jobs:
   check:
@@ -33,7 +35,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip
-          pip3 install ansible
+          pipx install ansible
+          pipx ensurepath
 
       - name: Export cloud key to machine.
         env:
@@ -43,6 +46,7 @@ jobs:
 
       - name: Cloud access.
         env:
+          TF_VAR_inventory_path: "./ansible-code/hosts.ini"
           YC_SERVICE_ACCOUNT_KEY_FILE: "./key.json"
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -53,6 +57,7 @@ jobs:
 
       - name: Deploy Infrastructure.
         env:
+          TF_VAR_inventory_path: "./ansible-code/hosts.ini"
           YC_SERVICE_ACCOUNT_KEY_FILE: "./key.json"
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -69,5 +74,5 @@ jobs:
           ANSIBLE_VAULT_PASSWORD_FILE: "./.vault_pass"
         run: |
           echo "$VAULT_PASS" > ./.vault_pass
-          ansible-playbook -i inventory.ini site.yml
+          ansible-playbook -i hosts.ini site.yml
           rm -f ./.vault_pass
