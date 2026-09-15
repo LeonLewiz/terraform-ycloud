@@ -37,18 +37,7 @@ jobs:
           RAW_CLOUD_KEY: ${{ secrets.YANDEX_CLOUD_KEY }} 
         run: |
           echo "$RAW_CLOUD_KEY" > key.json
-
-      - name: Setup yc CLI
-        env:
-          FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
-        run: |
-          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh \
-            | bash -s -- -i "$HOME/yandex-cloud" -n
-          "$HOME/yandex-cloud/bin/yc" config profile create ci
-          "$HOME/yandex-cloud/bin/yc" config set service-account-key "${{ github.workspace }}/key.json"
-          "$HOME/yandex-cloud/bin/yc" config set folder-id "$FOLDER_ID"
-          "$HOME/yandex-cloud/bin/yc" config list
-
+          
       - name: Cloud access.
         env:
           TF_VAR_inventory_path: "./ansible-code/hosts.ini"
@@ -72,25 +61,13 @@ jobs:
           terraform apply -auto-approve
 
 
-      - name: Debug inventory
-        working-directory: ./ansible-code
-        env:
-          ANSIBLE_SSH_KEY: ${{ github.workspace }}/id_ed25519
-        run: |
-          pwd
-          ls -l hosts.sh
-          ./hosts.sh | head -20
-          head -1 hosts.sh | xxd | head -2
-      
       - name: Run Ansible Playbook
         working-directory: ./ansible-code
         env:
           VAULT_PASS: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          ANSIBLE_INVENTORY: hosts.sh
           ANSIBLE_HOST_KEY_CHECKING: "False"
-          ANSIBLE_SSH_KEY: ${{ github.workspace }}/id_ed25519
           YC_BIN: ${{ github.workspace }}/yandex-cloud/bin/yc
         run: |
           echo "$VAULT_PASS" > "$RUNNER_TEMP/.vault_pass"
-          ansible-playbook -i hosts.sh site.yml \
+          ansible-playbook -i site.yml \
             --vault-password-file "$RUNNER_TEMP/.vault_pass"
