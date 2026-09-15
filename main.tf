@@ -42,6 +42,10 @@ resource "tls_private_key" "ssh_key" {
   algorithm = "ED25519"
 }
 
+resource "time_sleep" "wait_vms" {
+  create_duration = "60s"
+  depends_on      = [yandex_compute_instance.vm]
+}
 
 resource "yandex_compute_instance" "vm" {
   for_each = local.vms
@@ -86,6 +90,7 @@ resource "local_file" "private_key" {
 }
 
 resource "local_file" "inventory" {
+  depends_on = [time_sleep.wait_vms]
   filename = var.inventory_path
   content = templatefile("inventory.tpl", {
     vms          = yandex_compute_instance.vm
