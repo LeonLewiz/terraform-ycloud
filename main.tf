@@ -10,6 +10,9 @@ terraform {
     time = {
       source = "hashicorp/time"
   }
+    tls = {
+      source = "hashicorp/tls"
+}
   }
   backend "s3" {
     endpoint = "https://storage.yandexcloud.net"
@@ -28,7 +31,7 @@ provider "yandex" {
 
   folder_id                    = var.folder_id
 
-  zone                         = "ru-cetral1-a"
+  zone                         = "ru-central1-a"
 }
 
 data "yandex_vpc_subnet" "default_a" {
@@ -53,7 +56,7 @@ resource "yandex_compute_instance" "vm" {
 
   name        = "devops-study-${each.key}"
   platform_id = "standard-v3"
-  zone        = each.value.zone
+  zone        = data.yandex_vpc_subnet.default_a.zone
 
   resources {
     cores         = each.value.cores
