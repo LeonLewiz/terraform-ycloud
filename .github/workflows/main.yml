@@ -29,7 +29,17 @@ jobs:
           sudo apt-get install -y python3 python3-pip
           pipx install ansible
           pipx ensurepath
-
+          
+      - name: Setup yc CLI
+        env:
+          FOLDER_ID: ${{ vars.YC_FOLDER_ID }}
+        run: |
+          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh \
+            | bash -s -- -i "$HOME/yandex-cloud" -n
+          yc config profile create ci
+          yc config set service-account-key ./key.json
+          yc config set folder-id "$FOLDER_ID"
+            
       - name: Export cloud key to machine.
         env:
           RAW_CLOUD_KEY: ${{ secrets.YANDEX_CLOUD_KEY }} 
@@ -68,9 +78,11 @@ jobs:
         working-directory: ./ansible-code
         env:
           VAULT_PASS: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          ANSIBLE_INVENTORY: hosts.ini
+          ANSIBLE_INVENTORY: hosts.sh
           ANSIBLE_HOST_KEY_CHECKING: "False"
+          ANSIBLE_SSH_KEY: ${{ github.workspace }}/id_ed25519
+          YC_BIN: ${{ github.workspace }}/yandex-cloud/bin/yc
         run: |
           echo "$VAULT_PASS" > "$RUNNER_TEMP/.vault_pass"
-          ansible-playbook -i hosts.ini site.yml \
-          --vault-password-file "$RUNNER_TEMP/.vault_pass"
+          ansible-playbook -i hosts.sh site.yml \
+            --vault-password-file "$RUNNER_TEMP/.vault_pass"
