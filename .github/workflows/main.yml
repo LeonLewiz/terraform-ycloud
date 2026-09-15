@@ -72,6 +72,5 @@ jobs:
           VAULT_PASS: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
         run: |
           echo "$VAULT_PASS" > "$RUNNER_TEMP/.vault_pass"
-          echo -n "$VAULT_PASS" | wc -c
           ansible-playbook -i hosts.ini site.yml \
           --vault-password-file "$RUNNER_TEMP/.vault_pass"
