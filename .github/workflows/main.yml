@@ -2,12 +2,6 @@ name: CI
 
 on:
   workflow_dispatch:
-    inputs:
-      action:
-        description: "terraform action"
-        type: choice
-        options: [apply]
-        default: apply
 
 jobs:
   check:
@@ -17,7 +11,6 @@ jobs:
       - name: Checkout Terraform repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
 
       - name: Checkout Ansible repo
         uses: actions/checkout@v4
@@ -70,6 +63,7 @@ jobs:
         working-directory: ./ansible-code
         env:
           VAULT_PASS: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          ANSIBLE_HOST_KEY_CHECKING: "False"
         run: |
           echo "$VAULT_PASS" > "$RUNNER_TEMP/.vault_pass"
           ansible-playbook -i hosts.ini site.yml \
