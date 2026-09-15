@@ -29,15 +29,13 @@ jobs:
           sudo apt-get install -y python3 python3-pip
           pipx install ansible
           pipx ensurepath
-          
-     
-            
+
       - name: Export cloud key to machine.
         env:
           RAW_CLOUD_KEY: ${{ secrets.YANDEX_CLOUD_KEY }} 
         run: |
           echo "$RAW_CLOUD_KEY" > key.json
-          
+
       - name: Cloud access.
         env:
           TF_VAR_inventory_path: "./ansible-code/hosts.ini"
@@ -61,13 +59,18 @@ jobs:
           terraform apply -auto-approve
 
 
+      - name: Debug inventory
+        run: |
+          cat ansible-code/hosts.ini
+          ls -l id_ed25519
+    
       - name: Run Ansible Playbook
         working-directory: ./ansible-code
         env:
           VAULT_PASS: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          ANSIBLE_INVENTORY: hosts.ini
           ANSIBLE_HOST_KEY_CHECKING: "False"
-          YC_BIN: ${{ github.workspace }}/yandex-cloud/bin/yc
         run: |
           echo "$VAULT_PASS" > "$RUNNER_TEMP/.vault_pass"
-          ansible-playbook -i site.yml \
-            --vault-password-file "$RUNNER_TEMP/.vault_pass"
+          ansible-playbook -i hosts.ini site.yml \
+          --vault-password-file "$RUNNER_TEMP/.vault_pass"
