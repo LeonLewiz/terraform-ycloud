@@ -10,7 +10,6 @@ jobs:
     steps:
       - name: Checkout Terraform repo
         uses: actions/checkout@v4
-        with:
 
       - name: Checkout Ansible repo
         uses: actions/checkout@v4
