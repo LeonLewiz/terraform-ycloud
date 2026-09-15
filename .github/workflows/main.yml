@@ -36,9 +36,9 @@ jobs:
         run: |
           curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh \
             | bash -s -- -i "$HOME/yandex-cloud" -n
-          yc config profile create ci
-          yc config set service-account-key ./key.json
-          yc config set folder-id "$FOLDER_ID"
+          "$HOME/yandex-cloud/bin/yc" config profile create ci
+          "$HOME/yandex-cloud/bin/yc" config set service-account-key ./key.json
+          "$HOME/yandex-cloud/bin/yc" config set folder-id "$FOLDER_ID"
             
       - name: Export cloud key to machine.
         env:
@@ -70,10 +70,13 @@ jobs:
 
 
       - name: Debug inventory
+        working-directory: ./ansible-code
+        env:
+          ANSIBLE_SSH_KEY: ${{ github.workspace }}/id_ed25519
         run: |
-          cat ansible-code/hosts.ini
-          ls -l id_ed25519
-    
+          ls -l hosts.sh
+          ./hosts.sh | head -20
+      
       - name: Run Ansible Playbook
         working-directory: ./ansible-code
         env:
