@@ -40,7 +40,7 @@ data "yandex_vpc_subnet" "default_a" {
 }
 
 data "yandex_compute_image" "ubuntu" {
-  family = "ubuntu-2204-lts"
+  family = "leonlewiz-study-family"
 }
 
 resource "tls_private_key" "ssh_key" {
