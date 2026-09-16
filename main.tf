@@ -41,6 +41,7 @@ data "yandex_vpc_subnet" "default_a" {
 
 data "yandex_compute_image" "ubuntu" {
   family = "leonlewiz-study-family"
+  folder_id = var.folder_id 
 }
 
 resource "tls_private_key" "ssh_key" {
