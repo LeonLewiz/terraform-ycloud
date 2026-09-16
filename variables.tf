@@ -6,10 +6,21 @@ variable "cloud_id" {
 
 variable "folder_id" {
   description = "ID of the Learning folder"
-  type = string
-  sensitive = false
+  type        = string
+  sensitive   = false
 }
 
+variable "kms_key_id" {
+  description = "KMS ID"
+  type        = string
+  sensitive   = false
+}
+
+variable "zone" {
+  description = "Zone"
+  type        = string
+  sensitive   = false
+}
 
 locals {
   vms = {
