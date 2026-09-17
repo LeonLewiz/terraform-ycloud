@@ -117,8 +117,8 @@ resource "yandex_kubernetes_cluster" "k8s" {
     yandex_resourcemanager_folder_iam_member.k8s_vpc,
     yandex_resourcemanager_folder_iam_member.k8s_lb,
     yandex_resourcemanager_folder_iam_member.k8s_tunnel,
-    yandex_resourcemanager_folder_iam_member.k8s_encrypterdecrypter
-    yandex_resourcemanager_folder_iam_member.k8s_logging
+    yandex_resourcemanager_folder_iam_member.k8s_encrypterdecrypter,
+    yandex_resourcemanager_folder_iam_member.k8s_logging,
     yandex_resourcemanager_folder_iam_member.k8s_monitoring
   ]
 }
@@ -152,8 +152,6 @@ resource "yandex_kubernetes_node_group" "worker" {
     }
   }
 
-  node_service_account_id = yandex_iam_service_account.k8s.id
-
   scale_policy {
     fixed_scale {
       size = 1
@@ -177,8 +175,8 @@ resource "yandex_kubernetes_node_group" "worker" {
     yandex_resourcemanager_folder_iam_member.k8s_vpc,
     yandex_resourcemanager_folder_iam_member.k8s_lb,
     yandex_resourcemanager_folder_iam_member.k8s_tunnel,
-    yandex_resourcemanager_folder_iam_member.k8s_encrypterdecrypter
-    yandex_resourcemanager_folder_iam_member.k8s_logging
+    yandex_resourcemanager_folder_iam_member.k8s_encrypterdecrypter,
+    yandex_resourcemanager_folder_iam_member.k8s_logging,
     yandex_resourcemanager_folder_iam_member.k8s_monitoring
   ]
 }
