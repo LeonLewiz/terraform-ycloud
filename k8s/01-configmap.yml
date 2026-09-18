@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: my-nginx-site
+data:
+  DB_HOST: "db"
+  DB_NAME: "site_analytics"
+  DB_USER: "myuser"
+  WEB_PORT: "9090"
+  BACKEND_PORT: "8081"

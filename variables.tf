@@ -22,6 +22,11 @@ variable "zone" {
   sensitive   = false
 }
 
+variable "my_ip" {
+  description = "My public IP"
+  type        = list(string)
+}
+
 locals {
   vms = {
     managed1 = { cores = 2, memory = 2, zone = "ru-central1-a" }

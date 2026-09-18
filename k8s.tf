@@ -7,10 +7,17 @@ resource "yandex_vpc_security_group" "k8s" {
   network_id = data.yandex_vpc_network.default.id
 
   ingress {
-    description    = "kubectl"
+    description    = "kubectl-api"
+    protocol       = "TCP"
+    port           = 443
+    v4_cidr_blocks = var.my_ip
+  }
+
+  ingress {
+    description    = "kubectl-direct"
     protocol       = "TCP"
     port           = 6443
-    v4_cidr_blocks = ["192.168.13.130/32"]
+    v4_cidr_blocks = var.my_ip
   }
 
   ingress {
