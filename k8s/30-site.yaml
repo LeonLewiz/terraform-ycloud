@@ -18,6 +18,9 @@ spec:
           image: ghcr.io/leonlewiz/my-nginx-site/site:sha-9d291ff
           ports:
             - containerPort: 80
+          resources:
+            requests: { cpu: "50m", memory: "64Mi" }
+            limits: { cpu: "200m", memory: "128Mi" }
 ---
 apiVersion: v1
 kind: Service
