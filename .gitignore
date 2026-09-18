@@ -6,3 +6,4 @@ key.json
 terraform.tfvars
 id_ed25519
 k8s/02-secret.yml
+k8s/monitoring-values.yml
