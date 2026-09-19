@@ -27,6 +27,11 @@ variable "my_ip" {
   type        = list(string)
 }
 
+variable "node_group_enabled" {
+  type    = bool
+  default = true
+}
+
 locals {
   vms = {
     managed1 = { cores = 2, memory = 2, zone = "ru-central1-a" }

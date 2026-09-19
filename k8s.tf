@@ -131,6 +131,7 @@ resource "yandex_kubernetes_cluster" "k8s" {
 }
 
 resource "yandex_kubernetes_node_group" "worker" {
+  count      = var.node_group_enabled ? 1 : 0
   cluster_id = yandex_kubernetes_cluster.k8s.id
   name       = "k8sworker"
 
