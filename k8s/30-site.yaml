@@ -4,7 +4,7 @@ metadata:
   name: site
   namespace: my-nginx-site
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: site
