@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ghcr.io/leonlewiz/my-nginx-site/backend:sha-9d291ff
+          image: cr.yandex/crpk5978o767co0bur2k/backend:sha-9d291ff
           ports:
             - containerPort: 8000
           resources:

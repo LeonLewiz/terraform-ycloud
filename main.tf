@@ -15,10 +15,10 @@ terraform {
 }
   }
   backend "s3" {
-    endpoint = "https://storage.yandexcloud.net"
-    region   = "ru-central1"
-    bucket   = "ci-state-bucket"
-    key      = "terraform.tfstate"
+    endpoint        = "https://storage.yandexcloud.net"
+    region          = "ru-central1"
+    bucket          = "ci-state-bucket"
+    key             = "terraform.tfstate"
 
     skip_region_validation      = true
     skip_credentials_validation = true

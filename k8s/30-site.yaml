@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: site
-          image: ghcr.io/leonlewiz/my-nginx-site/site:sha-9d291ff
+          image: cr.yandex/crpk5978o767co0bur2k/site:sha-9d291ff
           ports:
             - containerPort: 80
           resources:
