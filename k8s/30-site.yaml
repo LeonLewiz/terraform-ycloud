@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: site
-          image: cr.yandex/var.registry_id/site:sha-9d291ff
+          image: cr.yandex/${var.registry_id}/site:sha-9d291ff
           ports:
             - containerPort: 80
           resources:
