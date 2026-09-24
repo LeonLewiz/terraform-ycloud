@@ -15,7 +15,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: backup
-              image: cr.yandex/var.registry_id/backup:sha-5dfc282
+              image: cr.yandex/${var.registry_id}/backup:sha-5dfc282
               env:
                 - name: DB_HOST
                   valueFrom:
