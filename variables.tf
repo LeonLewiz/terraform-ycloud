@@ -1,3 +1,9 @@
+variable "registry_id" {
+  description = "Registry ID"
+  type        = string
+  sensitive   = false
+}
+
 variable "cloud_id" {
   description = "ID of yaCloud"
   type        = string
