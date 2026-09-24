@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: cr.yandex/var.registry_id/postgres:15-alpine
+          image: cr.yandex/${var.registry_id}/postgres:15-alpine
           ports:
             - containerPort: 5432
           env:
