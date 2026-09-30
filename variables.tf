@@ -4,6 +4,11 @@ variable "registry_id" {
   sensitive   = false
 }
 
+variable "package_sha" {
+  description = "SHA ID of package"
+  type        = string
+  sensitive   = false
+}
 variable "cloud_id" {
   description = "ID of yaCloud"
   type        = string
